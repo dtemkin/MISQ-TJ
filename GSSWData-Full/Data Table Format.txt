@@ -1,0 +1,52 @@
+Table "posts"
+
+  `post_time` - timestamp when post was posted in Facebook
+  `post_id`- unique identifier for this post
+  `user_id` - unique identifier of the user on whose account this post appears
+  `poster_id` - unique identifier of the user who made this post
+  `status_type` - Facebook assigned description of this post
+  `message` - the message in the post
+  `story` - Facebook assigned description of this post
+  `link_url` - the URL of the link posted as part of this post
+  `link_name` - name for the link
+  `link_caption` - caption on the link
+  `link_description` - description text for the link
+  `object_id` - unique identifier for the object (photo/video) posted in the link
+  `parent_post_id` - unique identifier of parent post (typically when post originated from outside)
+  `update_time` - timestamp when the post was last updated
+  `reaction_none` - ignore
+  `reaction_like` - number of 'like' reaction on post
+  `reaction_love` - number of 'love' reaction on post
+  `reaction_wow` - number of 'wow' reaction on post
+  `reaction_haha` - number of 'haha' reaction on post
+  `reaction_sad` - number of 'sad' reaction on post
+  `reaction_angry` - number of 'angry' reaction on post
+  `reaction_thankful` - number of 'thankful' reaction on post
+  `reaction_pride` - number of 'pride' reaction on post
+  `entry_time` - timestamp when post was downloaded by us
+
+Table `comments` 
+  `comment_time` - timestamp when comment was posted in Facebook
+  `comment_id` - unique identifier for this comment
+  `parent_id` - unique identifier for post or comment under which this comment was made
+  `user_id` - unique identifier of the user who made the comment
+  `message` - the comment 
+  `replies_count` - number of replies to this comment
+  `reaction_none` - ignore
+  `reaction_like` - number of 'like' reaction on comment
+  `reaction_love` - number of 'love' reaction on comment
+  `reaction_wow` - number of 'wow' reaction on comment
+  `reaction_haha` - number of 'haha' reaction on comment
+  `reaction_sad` - number of 'sad' reaction on comment
+  `reaction_angry` - number of 'angry' reaction on comment
+  `reaction_thankful` - number of 'thankful' reaction on comment
+  `reaction_pride` - number of 'pride' reaction on comment
+  `entry_time` - timestamp when comment was downloaded by us
+
+
+NOTE: To find the comments to a post, you would first find the post_id corresponding to the post. All comments that has the parent_id as this post_id are comments made directly to the post. Sometimes comments are also made on other comments. To find such comments, you would first find the comment_id corresponding to the comment. All comments that has the parent_id as this comment_id are the replies to the comment. You can keep doing this to create the exact tree of reply/response chain.
+
+Table `refs` 
+  `id` - the post_id or comment_id of the post/comment where this reaction was given
+  `ref_type` - one of 'NONE', 'LIKE', 'LOVE', 'WOW', 'HAHA', 'SAD', 'ANGRY', 'THANKFUL', 'PRIDE', 'MENTION' referencing the type of reaction
+  `user_id` - unique identifier of the user who gave this reaction
